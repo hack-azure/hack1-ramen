@@ -1,9 +1,7 @@
 ﻿@page
 @model Ramen.Store.Pages.SuccessModel
-@{
-    ViewData["Title"] = "Success";
-    var ramen = ViewData["param"];
-}
-
-<h1>Success</h1>
-<p>@ramen お買い上げ</p>
+@{ ViewData["Title"] = "Success";
+                var ramen = ViewData["param"];
+                var imageUrl = ViewData["imageUrl"]; }<h1>Success</h1>
+<p>@ramen お買い上げありがとうございます。</p>
+<img src=@imageUrl width="100" />
