@@ -1,0 +1,224 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">元祖本家らーめん田森家</h1>
+    <p>サングラスの大将が適当なレシピでお届けします</p>
+    <div>
+        <!-- らーめん -->
+        <section>
+            <p>らーめん</p>
+            <button style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
+                    id="checkout-button-price_1GyWPJFMstGQDQYGBO7fFf7h"
+                    role="link">
+                らーめんを買う
+            </button>
+        </section>
+
+        <!-- みそらーめん -->
+        <section>
+            <p>みそらーめん</p>
+            <button style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
+                    id="checkout-button-price_1GyWxUFMstGQDQYGIuxl6OZC"
+                    role="link">
+                みそらーめんを買う
+            </button>
+        </section>
+
+        <!-- チャーシューめん -->
+        <section>
+            <p>チャーシューめん</p>
+            <button style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
+                    id="checkout-button-price_1GyWymFMstGQDQYGsZeUAGqJ"
+                    role="link">
+                チャーシューめんを買う
+            </button>
+        </section>
+
+        <!-- ネギらーめん -->
+        <section>
+            <p>ネギらーめん</p>
+            <button style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
+                    id="checkout-button-price_1GyWzZFMstGQDQYG7sDM3XK6"
+                    role="link">
+                ネギらーめんを買う
+            </button>
+        </section>
+
+        <!-- とんこつらーめん -->
+        <section>
+            <p>とんこつらーめん</p>
+            <button style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
+                    id="checkout-button-price_1GyX36FMstGQDQYGkI1Sbu8b"
+                    role="link">
+                とんこつらーめん
+            </button>
+        </section>
+    </div>
+</div>
+<!-- Load Stripe.js on your website. -->
+<script src="https://js.stripe.com/v3"></script>
+<div id="error-message"></div>
+
+<!-- らーめんのScriptタグ -->
+<script>
+    (function () {
+        var stripe = Stripe('pk_test_51GxsJaFMstGQDQYGTrWa7grBN6DUXdGZLiFsLb2ST3iBbOniAXENu4k0PkDtojP30jvxtBpxJqQnCiNwNSnJGWKo00V3Hmi1qD');
+
+        var checkoutButton = document.getElementById('checkout-button-price_1GyWPJFMstGQDQYGBO7fFf7h');
+        checkoutButton.addEventListener('click', function () {
+            // When the customer clicks on the button, redirect
+            // them to Checkout.
+            stripe.redirectToCheckout({
+                lineItems: [{ price: 'price_1GyWPJFMstGQDQYGBO7fFf7h', quantity: 1 }],
+                mode: 'payment',
+                // Do not rely on the redirect to the successUrl for fulfilling
+                // purchases, customers may not always reach the success_url after
+                // a successful payment.
+                // Instead use one of the strategies described in
+                // https://stripe.com/docs/payments/checkout/fulfillment
+                successUrl: 'https://localhost:44318/Success?id=ramen',
+                cancelUrl: 'https://localhost:44318/Canceled?id=ramen',
+            })
+                .then(function (result) {
+                    if (result.error) {
+                        // If `redirectToCheckout` fails due to a browser or network
+                        // error, display the localized error message to your customer.
+                        var displayError = document.getElementById('error-message');
+                        displayError.textContent = result.error.message;
+                    }
+                });
+        });
+    })();
+</script>
+
+<!-- みそらーめんのScriptタグ -->
+<script>
+    (function () {
+        var stripe = Stripe('pk_test_51GxsJaFMstGQDQYGTrWa7grBN6DUXdGZLiFsLb2ST3iBbOniAXENu4k0PkDtojP30jvxtBpxJqQnCiNwNSnJGWKo00V3Hmi1qD');
+
+        var checkoutButton = document.getElementById('checkout-button-price_1GyWxUFMstGQDQYGIuxl6OZC');
+        checkoutButton.addEventListener('click', function () {
+            // When the customer clicks on the button, redirect
+            // them to Checkout.
+            stripe.redirectToCheckout({
+                lineItems: [{ price: 'price_1GyWxUFMstGQDQYGIuxl6OZC', quantity: 1 }],
+                mode: 'payment',
+                // Do not rely on the redirect to the successUrl for fulfilling
+                // purchases, customers may not always reach the success_url after
+                // a successful payment.
+                // Instead use one of the strategies described in
+                // https://stripe.com/docs/payments/checkout/fulfillment
+                successUrl: 'https://localhost:44318/Success?id=miso-ramen',
+                cancelUrl: 'https://localhost:44318/Canceled?id=miso-ramen',
+            })
+                .then(function (result) {
+                    if (result.error) {
+                        // If `redirectToCheckout` fails due to a browser or network
+                        // error, display the localized error message to your customer.
+                        var displayError = document.getElementById('error-message');
+                        displayError.textContent = result.error.message;
+                    }
+                });
+        });
+    })();
+</script>
+
+<!-- チャーシュー麵のScriptタグ -->
+<script>
+    (function () {
+        var stripe = Stripe('pk_test_51GxsJaFMstGQDQYGTrWa7grBN6DUXdGZLiFsLb2ST3iBbOniAXENu4k0PkDtojP30jvxtBpxJqQnCiNwNSnJGWKo00V3Hmi1qD');
+
+        var checkoutButton = document.getElementById('checkout-button-price_1GyWymFMstGQDQYGsZeUAGqJ');
+        checkoutButton.addEventListener('click', function () {
+            // When the customer clicks on the button, redirect
+            // them to Checkout.
+            stripe.redirectToCheckout({
+                lineItems: [{ price: 'price_1GyWymFMstGQDQYGsZeUAGqJ', quantity: 1 }],
+                mode: 'payment',
+                // Do not rely on the redirect to the successUrl for fulfilling
+                // purchases, customers may not always reach the success_url after
+                // a successful payment.
+                // Instead use one of the strategies described in
+                // https://stripe.com/docs/payments/checkout/fulfillment
+                successUrl: 'https://localhost:44318/Success?id=cha-ramen',
+                cancelUrl: 'https://localhost:44318/Canceled?id=cha-ramen',
+            })
+                .then(function (result) {
+                    if (result.error) {
+                        // If `redirectToCheckout` fails due to a browser or network
+                        // error, display the localized error message to your customer.
+                        var displayError = document.getElementById('error-message');
+                        displayError.textContent = result.error.message;
+                    }
+                });
+        });
+    })();
+</script>
+
+<!-- ねぎラーメンのScriptタグ -->
+<script>
+    (function () {
+        var stripe = Stripe('pk_test_51GxsJaFMstGQDQYGTrWa7grBN6DUXdGZLiFsLb2ST3iBbOniAXENu4k0PkDtojP30jvxtBpxJqQnCiNwNSnJGWKo00V3Hmi1qD');
+
+        var checkoutButton = document.getElementById('checkout-button-price_1GyWzZFMstGQDQYG7sDM3XK6');
+        checkoutButton.addEventListener('click', function () {
+            // When the customer clicks on the button, redirect
+            // them to Checkout.
+            stripe.redirectToCheckout({
+                lineItems: [{ price: 'price_1GyWzZFMstGQDQYG7sDM3XK6', quantity: 1 }],
+                mode: 'payment',
+                // Do not rely on the redirect to the successUrl for fulfilling
+                // purchases, customers may not always reach the success_url after
+                // a successful payment.
+                // Instead use one of the strategies described in
+                // https://stripe.com/docs/payments/checkout/fulfillment
+                successUrl: 'https://localhost:44318/Success?id=negi-ramen',
+                cancelUrl: 'https://localhost:44318/Canceled?id=negi-ramen',
+            })
+                .then(function (result) {
+                    if (result.error) {
+                        // If `redirectToCheckout` fails due to a browser or network
+                        // error, display the localized error message to your customer.
+                        var displayError = document.getElementById('error-message');
+                        displayError.textContent = result.error.message;
+                    }
+                });
+        });
+    })();
+</script>
+
+<!-- とんこつラーメンのScriptタグ -->
+<script>
+    (function () {
+        var stripe = Stripe('pk_test_51GxsJaFMstGQDQYGTrWa7grBN6DUXdGZLiFsLb2ST3iBbOniAXENu4k0PkDtojP30jvxtBpxJqQnCiNwNSnJGWKo00V3Hmi1qD');
+
+        var checkoutButton = document.getElementById('checkout-button-price_1GyX36FMstGQDQYGkI1Sbu8b');
+        checkoutButton.addEventListener('click', function () {
+            // When the customer clicks on the button, redirect
+            // them to Checkout.
+            stripe.redirectToCheckout({
+                lineItems: [{ price: 'price_1GyX36FMstGQDQYGkI1Sbu8b', quantity: 1 }],
+                mode: 'payment',
+                // Do not rely on the redirect to the successUrl for fulfilling
+                // purchases, customers may not always reach the success_url after
+                // a successful payment.
+                // Instead use one of the strategies described in
+                // https://stripe.com/docs/payments/checkout/fulfillment
+                successUrl: 'https://localhost:44318/Success?id=tonkotsu-ramen',
+                cancelUrl: 'https://localhost:44318/Canceled?id=tonkotsu-ramen',
+            })
+                .then(function (result) {
+                    if (result.error) {
+                        // If `redirectToCheckout` fails due to a browser or network
+                        // error, display the localized error message to your customer.
+                        var displayError = document.getElementById('error-message');
+                        displayError.textContent = result.error.message;
+                    }
+                });
+        });
+    })();
+</script>
